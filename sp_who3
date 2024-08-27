@@ -1,4 +1,5 @@
 --Drop table sp_who_db
+-- download https://github.com/ronascentes/sp_who3/blob/master/sp_who3.sql
 create table sp_who_db
 (
 session_id nvarchar(250) null,
