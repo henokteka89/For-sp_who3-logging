@@ -1,0 +1,49 @@
+--Drop table sp_who_db
+create table sp_who_db
+(
+session_id nvarchar(250) null,
+host_name nvarchar(250) null,
+login_name nvarchar(250) null,
+db_name nvarchar(250)null,
+status nvarchar(250) null,
+command nvarchar(250) null,
+running_time nvarchar(250) null,	
+cpu_time int null,
+blk_by nvarchar(250) null,
+open_tran_count int null,
+wait_type nvarchar(250) null,
+wait_resource nvarchar(250) null,
+page_type_desc nvarchar(250) null,
+object_name nvarchar(250) null,
+program_name nvarchar(250) null,
+query_plan xml null,
+sql_text nvarchar(250) null,
+sql_handle nvarchar(250) null,
+requested_memory_kb bigint null,
+granted_memory_kb bigint null,
+ideal_memory_kb	bigint null,
+query_cost bigint null,
+user_obj_in_tempdb_MB int null,
+internal_obj_in_tempdb_MB int null,
+start_time datetime null,
+percent_complete int null,
+est_time_to_go nvarchar(250) null,
+est_completion_time datetime  null
+ )
+ --alter table sp_who_db
+ --alter column query_plan xml null
+
+ insert into sp_who_db
+ exec sp_who3
+
+ select 
+ --*
+ session_id, login_name,
+ db_name, Status, Command
+ ,cpu_time / 1000 cpu_sec, blk_by
+ , wait_type, wait_resource
+ , query_plan, sql_text, granted_memory_kb / 1024 MemGrantMB
+ ,query_cost, user_obj_in_tempdb_MB, internal_obj_in_tempdb_mb
+
+
+ from sp_who_db
